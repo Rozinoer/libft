@@ -30,15 +30,11 @@ static char		*ft_string(char **dst, int b, int i, const char *src)
 {
 	char *dst1;
 	char *sub;
-
-	if(!(sub = ft_substr((char *)src, i, b - i)))
+	sub = ft_substr((char *)src, i, b - i);
+    dst1 = (char *)malloc(ft_strlen(sub));
+	if (dst1 == 0)
 	{
-		ft_clear(dst);
-		return (0);
-	}
-	if (!(dst1 = (char *)malloc(ft_strlen(sub))))
-	{
-		ft_clear(dst);
+	    ft_clear(dst);
 		return (0);
 	}
 	dst1 = sub;
@@ -105,7 +101,8 @@ char			**ft_split(char const *src, char c)
 	p = &c;
 	if (!src || !c)
 		return (0);
-	src = ft_strtrim(src, p);
+	if (!(src = ft_strtrim(src, p)))
+        return (0);
 	if (*src == 0)
 		a = 1;
 	else
