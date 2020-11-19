@@ -6,7 +6,7 @@
 /*   By: dmyesha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 16:51:18 by dmyesha           #+#    #+#             */
-/*   Updated: 2020/11/17 19:59:25 by dmyesha          ###   ########.fr       */
+/*   Updated: 2020/11/19 18:31:17 by dmyesha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,13 @@ static int		ft_clear(char **a)
 static char		*ft_string(char **dst, int b, int i, const char *src)
 {
 	char *dst1;
-	char *sub;
-	sub = ft_substr((char *)src, i, b - i);
-    dst1 = (char *)malloc(ft_strlen(sub));
+
+	dst1 = ft_substr((char *)src, i, b - i);
 	if (dst1 == 0)
 	{
-	    ft_clear(dst);
+		ft_clear(dst);
 		return (0);
 	}
-	dst1 = sub;
 	return (dst1);
 }
 
@@ -70,24 +68,22 @@ static char		**ft_strsplit(char **dst, const char *src, char c, int i)
 	return (dst);
 }
 
-static int		ft_wordcount(const char *src, char c)
+static int		ft_count_words(char const *s, char c)
 {
-	int		i;
-	int		count;
+	int index;
+	int count_words;
 
-	if (src == 0)
-		return (0);
-	i = 0;
-	count = 0;
-	while (*(src + i))
+	index = 0;
+	count_words = 0;
+	if (s[0] != c)
+		count_words++;
+	while (s[index + 1])
 	{
-		if (*(src + i) == c && *(src + i + 1) != c && *(src + i + 1) != '\0')
-			count++;
-		i++;
+		if (s[index] == c && s[index + 1] != c)
+			count_words++;
+		index++;
 	}
-	if (count == 0)
-		count = 1;
-	return (count);
+	return (count_words);
 }
 
 char			**ft_split(char const *src, char c)
@@ -95,23 +91,14 @@ char			**ft_split(char const *src, char c)
 	int		i;
 	int		a;
 	char	**dst;
-	char	*p;
 
 	i = 0;
-	p = &c;
 	if (!src || !c)
 		return (0);
-	if (!(src = ft_strtrim(src, p)))
-        return (0);
-	if (*src == 0)
+	if (*src == '\0')
 		a = 1;
 	else
-	{
-		if (ft_wordcount(src, c) == 1)
-			a = ft_wordcount(src, c) + 1;
-		else
-			a = ft_wordcount(src, c) + 2;
-	}
+		a = ft_count_words(src, c) + 1;
 	dst = (char**)malloc(a * sizeof(char*));
 	if (dst == 0)
 		return (0);

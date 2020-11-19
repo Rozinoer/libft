@@ -6,7 +6,7 @@
 /*   By: dmyesha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 17:16:18 by dmyesha           #+#    #+#             */
-/*   Updated: 2020/11/14 17:18:27 by dmyesha          ###   ########.fr       */
+/*   Updated: 2020/11/17 19:09:30 by dmyesha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 static size_t		ft_strnlen(const char *s, size_t maxlen)
 {
-    if (ft_strlen(s) > maxlen)
-        return (maxlen);
-    else
-        return (ft_strlen(s));
+	if (ft_strlen(s) > maxlen)
+		return (maxlen);
+	else
+		return (ft_strlen(s));
 }
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char				*ft_strnstr(const char *haystack,
+					const char *needle, size_t len)
 {
 	int		i;
 	size_t	needle_len;

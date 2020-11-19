@@ -6,7 +6,7 @@
 /*   By: dmyesha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 17:47:49 by dmyesha           #+#    #+#             */
-/*   Updated: 2020/11/14 19:08:56 by dmyesha          ###   ########.fr       */
+/*   Updated: 2020/11/17 19:10:46 by dmyesha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
-char	            *ft_strnstr(const char *haystack, const char *needle, size_t len);
+char				*ft_strnstr(const char *haystack, const char *needle,
+					size_t len);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
