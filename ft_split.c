@@ -93,7 +93,7 @@ char			**ft_split(char const *src, char c)
 	char	**dst;
 
 	i = 0;
-	if (!src || !c)
+	if (!src)
 		return (0);
 	if (*src == '\0')
 		a = 1;
