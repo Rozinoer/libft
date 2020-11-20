@@ -5,41 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmyesha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/14 16:51:18 by dmyesha           #+#    #+#             */
-/*   Updated: 2020/11/19 18:31:17 by dmyesha          ###   ########.fr       */
+/*   Created: 2020/11/20 19:50:02 by dmyesha           #+#    #+#             */
+/*   Updated: 2020/11/20 19:51:18 by dmyesha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_clear(char **a)
+static int		ft_clear(char **a, int z)
 {
-	int i;
-
-	i = 0;
-	while (a[i])
+	while (z >= 0)
 	{
-		free(a[i]);
-		i++;
+		free(a[z]);
+		z--;
 	}
 	free(a);
 	return (0);
 }
 
-static char		*ft_string(char **dst, int b, int i, const char *src)
+static char		*ft_string(int b, int i, const char *src)
 {
 	char *dst1;
 
 	dst1 = ft_substr((char *)src, i, b - i);
 	if (dst1 == 0)
-	{
-		ft_clear(dst);
 		return (0);
-	}
 	return (dst1);
 }
 
-static char		**ft_strsplit(char **dst, const char *src, char c, int i)
+static int		ft_strsplit(char **dst, const char *src, char c, int i)
 {
 	int b;
 	int z;
@@ -57,15 +51,15 @@ static char		**ft_strsplit(char **dst, const char *src, char c, int i)
 		{
 			while (*(src + b) != c && *(src + b) != '\0')
 				b++;
-			if (!(dst[z] = ft_string(dst, b, i, src)))
-				return (0);
+			if (!(dst[z] = ft_string(b, i, src)))
+				return (ft_clear(dst, z));
 			z++;
 			if (!*(src + b))
 				break ;
 			i = ++b;
 		}
 	}
-	return (dst);
+	return (1);
 }
 
 static int		ft_count_words(char const *s, char c)
@@ -99,10 +93,12 @@ char			**ft_split(char const *src, char c)
 		a = 1;
 	else
 		a = ft_count_words(src, c) + 1;
+	printf("my word = %d\n",a);
 	dst = (char**)malloc(a * sizeof(char*));
 	if (dst == 0)
 		return (0);
-	dst = ft_strsplit(dst, src, c, i);
+	if (ft_strsplit(dst, src, c, i) == 0)
+		return (0);
 	dst[a - 1] = NULL;
 	return (dst);
 }
