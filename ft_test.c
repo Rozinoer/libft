@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#include <stdio.h>
 void	ft_free_mem(char **main_array, int main_index)
 {
 	while (main_index >= 0)
@@ -98,7 +98,7 @@ char	**collect_data(char **main_array, char const *s, char c)
 	return (main_array);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_test(char const *s, char c)
 {
 	char	**main_array;
 	int		len_main_array;
@@ -108,6 +108,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (0);
 	len_main_array = ft_count_words(s, c);
+	printf("word count igor = %d\n",len_main_array + 1);
 	if (!(main_array = (char**)malloc(sizeof(char*) * (len_main_array + 1))))
 		return (0);
 	main_array = mem_words(main_array, s, c, index);

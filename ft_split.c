@@ -93,7 +93,6 @@ char			**ft_split(char const *src, char c)
 		a = 1;
 	else
 		a = ft_count_words(src, c) + 1;
-	printf("my word = %d\n",a);
 	dst = (char**)malloc(a * sizeof(char*));
 	if (dst == 0)
 		return (0);
